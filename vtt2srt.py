@@ -11,9 +11,23 @@ def vtt2srt(fn_in, fn_out):
     with open(fn_in,'r') as fin, open(fn_out,'w') as fout:
         line_number = 0
         for line in fin:
-            if line_number >= 10:
-                break
-            print line
+            #print '>',line
+            r = re.findall(r'(\d{2}:\d{2}:\d{2}\.\d{3}) --> (\d{2}:\d{2}:\d{2}\.\d{3})', line)
+            if r:
+                # New line
+                #if line_number:
+                #    fout.write('\n')
+                line_number += 1
+                fout.write('%d\n' % line_number)
+                fout.write('%s --> %s\n' % (r[0][0].replace('.',','), r[0][1].replace('.',',')))
+            else:
+                # Content
+                #line = re.sub(r'<c\.color[A-F0-9]{6}>', '', line)
+                #line = re.sub(r'</c>', '', line)
+                #line = re.sub(r'<c>', '', line)
+                line = re.sub(r'<.+?>', '', line)
+                if line_number:
+                    fout.write(line)
 
 def main():
     fn_in = ''
