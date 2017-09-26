@@ -14,17 +14,11 @@ def vtt2srt(fn_in, fn_out):
             #print '>',line
             r = re.findall(r'(\d{2}:\d{2}:\d{2}\.\d{3}) --> (\d{2}:\d{2}:\d{2}\.\d{3})', line)
             if r:
-                # New line
-                #if line_number:
-                #    fout.write('\n')
                 line_number += 1
                 fout.write('%d\n' % line_number)
                 fout.write('%s --> %s\n' % (r[0][0].replace('.',','), r[0][1].replace('.',',')))
             else:
                 # Content
-                #line = re.sub(r'<c\.color[A-F0-9]{6}>', '', line)
-                #line = re.sub(r'</c>', '', line)
-                #line = re.sub(r'<c>', '', line)
                 line = re.sub(r'<.+?>', '', line)
                 if line_number:
                     fout.write(line)
