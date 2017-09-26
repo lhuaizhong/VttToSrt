@@ -1,0 +1,12 @@
+.idea
+*.DS_Store
+venv/
+*.pyc
+.ipynb_checkpoints
+*.csv
+*.png
+*.jpeg
+*.jpg
+*.vtt
+*.srt
+
